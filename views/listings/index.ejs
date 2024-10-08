@@ -1,0 +1,274 @@
+<% layout("layouts/boilerplate") %> <%= success %> 
+
+<style>
+    #filters{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .filter{
+        text-align: center;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        opacity: 0.7;
+    }
+    .filter:hover{
+        opacity: 1;
+        cursor: pointer;
+    }
+    .filter p {
+        font-size: 0.8rem;
+
+    }
+    .tax-info{
+        display: none;
+    }
+    .tax-toggel{
+        border: 1px solid black;
+        border-radius: 1rem;
+        height: 2.25rem;
+        padding: 1rem;
+        margin-left: 3rem;
+        display: inline-flex;
+        align-items: center;
+        
+    }
+
+     /* @media (max-width: 990px){
+            .filters{
+                display: flex;
+                
+            } 
+            .filters .filter{
+                display: inline;
+            }
+        } */
+
+        
+      /*  @media (max-width: 766px){
+            .filter:nth-child(n+5){
+                display: none;
+            } 
+        }
+
+        @media (max-width: 376px){
+            .filter:nth-child(n+3){
+                display: none;
+            } 
+        } */
+        .carousel-control-prev{
+            margin-right: 50px;
+            width: 50px;
+        }
+        .carousel-control-next {
+            color: black;
+            width: 50px;
+
+        }
+        .carousel-control-prev-icon,
+     .carousel-control-next-icon {
+    background-color: #fe424d; /* Set the arrow color (can be any color you want) */
+    border-radius: 50%; /* Make the icon background round */
+}
+
+
+</style>
+    
+        
+            <!-- <div class="alert alert-danger"> -->
+                <%= error %> <!-- Display the error message -->
+            <!-- </div> -->
+    <link rel="stylesheet" href="/public/CSS/style.css">
+    <div id="iconCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-around">
+                    <div class="filter" data-category="Trending">
+                        <div class="icon"><i class="fa-solid fa-fire" id="icons" data-icon-name="Trending"></i></div>
+                        <p>Trending</p></a>
+                    </div>
+                    <div class="filter" data-category="Room">
+                        <div class="icon"><i class="fa-solid fa-bed" id="icons" data-icon-name="Room"></i></div>
+                        <p>Room</p>
+                    </div>
+                    <div class="filter" data-category="Iconic Cities">
+                        <div class="icon"><i class="fa-solid fa-mountain-city " id="icons" data-icon-name="Iconic Cities"></i></div> 
+                        <p>Iconic Cities</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-around">
+                    <div class="filter" data-category="Mountains">
+                        <div class="icon"><i class="fa-solid fa-mountain" id="icons" data-icon-name="Mountains"></i></div>
+                        <p>Mountains</p>
+                    </div>
+                    <div class="filter" data-category="Castles">
+                        <div class="icon"><i class="fa-brands fa-fort-awesome" id="icons" data-icon-name="Castles"></i></div>
+                        <p>Castles</p>
+                    </div>
+                    <div class="filter" data-category="Amazing Pools">
+                        <div class="icon"><i class="fa-solid fa-person-swimming" id="icons" data-icon-name="Amazing pools"></i></div>
+                        <p>Amazing Pools</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-around">
+                    <div class="filter" data-category="Camping">
+                        <div class="icon"><i class="fa-solid fa-campground" id="icons" data-icon-name="Camping"></i></div>
+                        <p>Camping</p>
+                    </div>
+                    <div class="filter" data-category="Farms">
+                        <div class="icon"><i class="fa-solid fa-cow " id="icons" data-icon-name="Farms"></i></div>
+                        <p>Farms</p>
+                    </div>
+                    <div class="filter" data-category="Arctic">
+                        <div class="icon"><i class="fa-solid fa-snowflake" id="icons" data-icon-name="Arctic"></i></div>
+                        <p>Arctic</p>
+                    </div>
+                </div>
+            </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#iconCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#iconCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div class="tax-toggel">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+        </div>
+       
+          
+
+    </div>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+        <% for (let listing of allListings){ %>
+            <a href="/listings/<%= listing._id %>" class="listing-link">
+                <div class="card col listing-card">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listingImage" style="height: 20rem;"/>
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                      <p class="card-text"><b><%= listing.title %></b> <br/>
+                        &#8377; <%= listing.price.toLocaleString("en-IN") %> /night
+                          <i class="tax-info">&nbsp; &nbsp; +18%GST</i>
+                    </p>
+                    </div>
+                  </div>  
+            </a>
+            
+        <%  } %>
+        <br/>    
+    </div> 
+
+
+ <script>
+    const taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click", ()=>{
+        let taxInfo = document.getElementsByClassName("tax-info");
+        for(info of taxInfo){
+            if(info.style.display != "inline"){
+                info.style.display = "inline";
+            }else{
+                info.style.display = "none";
+            }
+        }
+    });
+    // script.js
+
+document.addEventListener('DOMContentLoaded', () => {
+    const categories = document.querySelectorAll('.filter');
+    const listingsContainer = document.getElementById('filters');
+    categories.forEach(category => {
+        category.addEventListener('click', () => {
+            const selectedCategory = category.getAttribute('data-category');
+            console.log("selected category is:", selectedCategory);
+            filterListings(selectedCategory);
+        });
+    });
+
+});
+
+function filterListings(category) {
+    fetch(`http://localhost:8086/listings/category/${category}`)
+           .then(response=>{
+             return response.json();
+    }).then(data=>{
+         displayListings(data);
+    })
+     .catch(error => {
+            console.error('Error fetching listings:', error);
+        });
+}
+function displayListings(listings) {
+    const listingsContainer = document.querySelector('.row');  // Ensure this container exists in your HTML
+    listingsContainer.innerHTML = '';  // Clear any previous listings
+
+    if (listings.length === 0) {
+        listingsContainer.innerHTML = '<p>No listings available for this category.</p>';
+        return;
+    }
+
+    listings.forEach(listing => {
+        const listingCard = `
+            <a href="/listings/${listing._id}" class="listing-link">
+                <div class="card col listing-card">
+                    <img src="${listing.image.url}" class="card-img-top" alt="listingImage" style="height: 20rem;" />
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b>${listing.title}</b> <br />
+                            &#8377; ${listing.price.toLocaleString("en-IN")} /night
+                            <i class="tax-info">&nbsp; &nbsp; +18%GST</i>
+                        </p>
+                    </div>
+                </div>  
+            </a>
+        `;
+        listingsContainer.innerHTML += listingCard;
+    });
+  
+ }
+ document.addEventListener('DOMContentLoaded', () => {
+    // Attach click event listener to the search button
+    document.querySelector('.btn-search').addEventListener('click', function (event) {
+        event.preventDefault();  // Prevent the form from submitting normally
+        // Get value from the location input field
+        const locationInput = document.querySelector('.inp-search').value;  // Get location input
+        console.log(locationInput);
+        if (locationInput) {
+            searchListings(locationInput);
+        } else {
+            console.log('Please enter a location.');
+        }
+    });
+});
+function searchListings(location) {
+    console.log("serching for location:", location);
+    const listingsContainer = document.querySelector('.row'); 
+    fetch(`http://localhost:8086/listings/location/${location}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+             return response.json();
+        })
+        .then(data => {
+            console.log('Search Results:', data);
+             displayListings(data);  // Call the function to display listings on the frontend
+        })
+        .catch(error => {
+            console.error('Error fetching listings:', error);
+        });
+        
+}
+
+
+</script>
+  
