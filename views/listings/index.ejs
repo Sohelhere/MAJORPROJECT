@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function filterListings(category) {
-    fetch(`http://localhost:8086/listings/category/${category}`)
+    fetch(`http://majorproject-2-gniz.onrender.com/listings/category/${category}`)
            .then(response=>{
              return response.json();
     }).then(data=>{
@@ -252,7 +252,7 @@ function displayListings(listings) {
 function searchListings(location) {
     console.log("serching for location:", location);
     const listingsContainer = document.querySelector('.row'); 
-    fetch(`http://localhost:8086/listings/location/${location}`)
+    fetch(`http://majorproject-2-gniz.onrender.com/listings/location/${location}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
