@@ -143,6 +143,9 @@ body{
     padding-right: 0;
 }
 
+.card{
+    width: auto;
+}
 /* map */
 #map{
     height: 400px;
